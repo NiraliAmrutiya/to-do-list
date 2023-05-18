@@ -1,0 +1,10 @@
+.goal-item {
+  margin: 1rem;
+  border: 2px solid #8b005d;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  color: #626262;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  display: inline-block;
+}
