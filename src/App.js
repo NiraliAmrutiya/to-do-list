@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import TaskList from "./components/CourseGoals/TaskList/TaskList";
 import TaskInput from "./components/CourseGoals/TaskInput/TaskInput";
+import Card from "./components/UI/Card/Card";
+import classes from "./components/UI/Card/Card.module.css";
 import "./App.css";
 
 const tasks = [
@@ -38,9 +40,9 @@ const App = () => {
     });
   };
 
-  const deleteItemHandler = (goalId) => {
+  const deleteItemHandler = (taskId) => {
     setTaskGoals((prevTasks) => {
-      const updatedGoals = prevTasks.filter((goal) => goal.id !== goalId);
+      const updatedGoals = prevTasks.filter((task) => task.id !== taskId);
       return updatedGoals;
     });
   };
@@ -50,17 +52,16 @@ const App = () => {
   );
 
   if (taskGoals.length > 0) {
-    content = (
-      <TaskList items={taskGoals} onDeleteItem={deleteItemHandler} />
-    );
+    content = <TaskList items={taskGoals} onDeleteItem={deleteItemHandler} />;
   }
 
   return (
     <div className="container">
-      <section id="goal-form">
+      {/* You can give any other class in card component it would be added with card class. */}
+      <Card className={classes.card}>
         <h4 className="text-center mb-4">ToDo List</h4>
         <TaskInput onAddTask={addTaskHandler} />
-      </section>
+      </Card>
       <section id="goals">
         {content}
         {/* {courseGoals.length > 0 && (

@@ -9,13 +9,14 @@ const TaskItem = (props) => {
 
   const deleteHandler = () => {
     // setDeleteText('(Deleted!)');
-    // props.onDelete(props.id);
-    console.log(props.description);
+    props.onDelete(props.id);
+    // console.log(props.description);
   };
 
   return (
-    <li className="goal-item" onClick={deleteHandler}>
+    <div className="col-3" onClick={deleteHandler}>
       {/* {props.children} */}
+      <div className="goal-item">
       <b>Title:</b> {props.title}
       <br />
       <b>Description:</b> {props.description}
@@ -23,7 +24,8 @@ const TaskItem = (props) => {
       <b>Start Date:</b> <Date date={props.startdate} />
       <b>End Date:</b> <Date date={props.enddate} />
       <br />
-    </li>
+      </div>
+    </div>
   );
 };
 

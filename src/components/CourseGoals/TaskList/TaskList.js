@@ -5,7 +5,7 @@ import "./TaskList.css";
 const TaskList = (props) => {  
   
   return (
-    <ul className="goal-list">
+    <div className="goal-list row">
       {props.items.map((task) => (
         <TaskItem   
           key={task.id}
@@ -16,7 +16,7 @@ const TaskList = (props) => {
           onDelete={props.onDeleteItem}
         />
       ))}
-    </ul>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Button from "../../UI/Button/Button";
 import styles from "./TaskInput.module.css";
+import Modal from "../../UI/Modal/Modal";
 // import styled from "styled-components";
 
 // const FormControl = styled.div`
@@ -37,6 +38,7 @@ const CourseInput = (props) => {
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredStartDate, setEnteredStartDate] = useState("");
   const [enteredEndDate, setEnteredEndDate] = useState("");
+  const [error, setError] = useState();
 
   const [isValid, setIsValid] = useState(true);
 
@@ -54,7 +56,6 @@ const CourseInput = (props) => {
 
   const descriptionChangeHandler = (event) => {
     setEnteredDescription(event.target.value);
-    
   };
 
   const startDateChangeHandler = (event) => {
@@ -63,7 +64,6 @@ const CourseInput = (props) => {
 
   const endDateChangeHandler = (event) => {
     setEnteredEndDate(event.target.value);
-    
   };
 
   const formSubmitHandler = (event) => {
@@ -76,13 +76,21 @@ const CourseInput = (props) => {
       enddate: new Date(enteredEndDate),
     };
 
-    if (enteredTitle.trim().length === 0) {
+    if (
+      enteredTitle.trim().length === 0 ||
+      enteredDescription.trim().length === 0
+    ) {
+      setError({
+        title: "Invalid input",
+        message:
+          "Please enter a valid Title and Description (non-empty values).",
+      });
       setIsValid(false);
       return;
     }
     props.onAddTask(taskData);
     console.log(taskData);
-  
+
     //resets the form to empty
     setEnteredTitle("");
     setEnteredDescription("");
@@ -90,53 +98,60 @@ const CourseInput = (props) => {
     setEnteredEndDate("");
   };
 
-  return (
-    <form onSubmit={formSubmitHandler}>
-      <div className="row">
-        <div
-          className={`${styles["form-control"]} ${
-            !isValid && styles.invalid
-          } col-6`}
-        >
-          <label>Title</label>
-          <input
-            type="text"
-            className="form-control"
-            value={enteredTitle}
-            onChange={titleChangeHandler}
-          />
-        </div>
-        <div className="col-6">
-          <label>Description</label>
-          <input
-            type="text"
-            className="form-control"
-            value={enteredDescription}
-            onChange={descriptionChangeHandler}
-          />
-        </div>
-        <div className="col-6">
-          <label>Start Date</label>
-          <input
-            type="date"
-            className="form-control"
-            value={enteredStartDate}
-            onChange={startDateChangeHandler}
-          />
-        </div>
-        <div className="col-6">
-          <label>End Date</label>
-          <input
-            type="date"
-            className="form-control"
-            value={enteredEndDate}
-            onChange={endDateChangeHandler}
-          />
-        </div>
-      </div>
+  const errorHandler = () => {
+    setError(null);
+  };
 
-      <Button type="submit">Add Goal</Button>
-    </form>
+  return (
+    <div>
+      {error && <Modal title={error.title} message={error.message} onConfirm={errorHandler} />}
+      <form onSubmit={formSubmitHandler}>
+        <div className="row">
+          <div
+            className={`${styles["form-control"]} ${
+              !isValid && styles.invalid
+            } col-6`}
+          >
+            <label>Title</label>
+            <input
+              type="text"
+              className="form-control"
+              value={enteredTitle}
+              onChange={titleChangeHandler}
+            />
+          </div>
+          <div className="col-6">
+            <label>Description</label>
+            <input
+              type="text"
+              className="form-control"
+              value={enteredDescription}
+              onChange={descriptionChangeHandler}
+            />
+          </div>
+          <div className="col-6">
+            <label>Start Date</label>
+            <input
+              type="date"
+              className="form-control"
+              value={enteredStartDate}
+              onChange={startDateChangeHandler}
+            />
+          </div>
+          <div className="col-6">
+            <label>End Date</label>
+            <input
+              type="date"
+              className="form-control"
+              value={enteredEndDate}
+              onChange={endDateChangeHandler}
+            />
+          </div>
+        </div>
+
+        <Button type="submit">Add Goal</Button>
+      </form>
+    </div>
   );
 };
 
