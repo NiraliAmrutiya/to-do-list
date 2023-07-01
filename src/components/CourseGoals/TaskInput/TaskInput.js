@@ -3,41 +3,13 @@ import React, { useState } from "react";
 import Button from "../../UI/Button/Button";
 import styles from "./TaskInput.module.css";
 import Modal from "../../UI/Modal/Modal";
+import Input from "../../UI/Input/Input";
 // import styled from "styled-components";
-
-// const FormControl = styled.div`
-//   margin: 0.5rem 0;
-
-//   & label {
-//     font-weight: bold;
-//     display: block;
-//     margin-bottom: 0.5rem;
-//     color : ${props => props.invalid ? 'red' : '#5f5f5f'};
-//   }
-
-//   & input {
-//     display: block;
-//     width: 100%;
-//     border: 1.5px solid ${props => props.invalid ? 'red' : '#5f5f5f'};
-//     background : ${props => props.invalid ? '#fad0ec' : 'transparent'};
-//     font: inherit;
-//     line-height: 1.5rem;
-//     padding: 0 0.25rem;
-//   }
-
-//   & input:focus {
-//     outline: none;
-//     background: ;
-//     border-color: #8b005d;
-//   }
-
-// `;
 
 const CourseInput = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
-  const [enteredStartDate, setEnteredStartDate] = useState("");
-  const [enteredEndDate, setEnteredEndDate] = useState("");
+
   const [error, setError] = useState();
 
   const [isValid, setIsValid] = useState(true);
@@ -58,22 +30,12 @@ const CourseInput = (props) => {
     setEnteredDescription(event.target.value);
   };
 
-  const startDateChangeHandler = (event) => {
-    setEnteredStartDate(event.target.value);
-  };
-
-  const endDateChangeHandler = (event) => {
-    setEnteredEndDate(event.target.value);
-  };
-
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
     const taskData = {
       title: enteredTitle,
       description: enteredDescription,
-      startdate: new Date(enteredStartDate),
-      enddate: new Date(enteredEndDate),
     };
 
     if (
@@ -94,8 +56,6 @@ const CourseInput = (props) => {
     //resets the form to empty
     setEnteredTitle("");
     setEnteredDescription("");
-    setEnteredStartDate("");
-    setEnteredEndDate("");
   };
 
   const errorHandler = () => {
@@ -104,7 +64,13 @@ const CourseInput = (props) => {
 
   return (
     <div>
-      {error && <Modal title={error.title} message={error.message} onConfirm={errorHandler} />}
+      {error && (
+        <Modal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <form onSubmit={formSubmitHandler}>
         <div className="row">
           <div
@@ -112,8 +78,8 @@ const CourseInput = (props) => {
               !isValid && styles.invalid
             } col-6`}
           >
-            <label>Title</label>
-            <input
+            <Input
+              label="Title"
               type="text"
               className="form-control"
               value={enteredTitle}
@@ -121,30 +87,12 @@ const CourseInput = (props) => {
             />
           </div>
           <div className="col-6">
-            <label>Description</label>
-            <input
+            <Input
+              label="Description"
               type="text"
               className="form-control"
               value={enteredDescription}
               onChange={descriptionChangeHandler}
-            />
-          </div>
-          <div className="col-6">
-            <label>Start Date</label>
-            <input
-              type="date"
-              className="form-control"
-              value={enteredStartDate}
-              onChange={startDateChangeHandler}
-            />
-          </div>
-          <div className="col-6">
-            <label>End Date</label>
-            <input
-              type="date"
-              className="form-control"
-              value={enteredEndDate}
-              onChange={endDateChangeHandler}
             />
           </div>
         </div>

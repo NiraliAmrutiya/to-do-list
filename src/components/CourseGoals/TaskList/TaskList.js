@@ -2,19 +2,17 @@ import React from "react";
 import TaskItem from "../TaskItem/TaskItem";
 import "./TaskList.css";
 
-const TaskList = (props) => {  
-  
+const TaskList = (props) => {
   return (
     <div className="goal-list row">
       {props.items.map((task) => (
-        <TaskItem   
+        <TaskItem
           key={task.id}
+          id={task.id}
           title={task.title}
           description={task.description}
-          startdate={task.startdate}
-          enddate={task.enddate}
           onDelete={props.onDeleteItem}
-        />
+        ></TaskItem>
       ))}
     </div>
   );

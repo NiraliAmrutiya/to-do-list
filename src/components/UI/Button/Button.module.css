@@ -1,12 +1,12 @@
-.button {
+.buttonPrimary {
   width: 100%;
   font: inherit;
   padding: 0.5rem 1.5rem;
-  border: 1px solid #8b005d;
-  border-radius: 5px;
+  border: 1px solid #c98895;
+  border-radius: 20px;
   color: white;
-  background: #8b005d;
-  box-shadow: 5px 4px 12px rgba(83, 83, 83, 0.26);
+  background: #c98895;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);
   cursor: pointer;
   margin: 1rem 0;
 }
@@ -17,9 +17,9 @@
 
 .button:hover,
 .button:active {
-  background: #ac0e77;
-  border-color: #ac0e77;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
+  background: #c98895;
+  border-color: #c98895;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.26);
 }
 
 @media (min-width: 768px) {
